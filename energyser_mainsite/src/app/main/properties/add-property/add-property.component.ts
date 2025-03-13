@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,7 @@ export class AddPropertyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient, 
-    private modalService: NgbModal
+    // private modalService: NgbModal
   ) {
       this.personalInfoForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
