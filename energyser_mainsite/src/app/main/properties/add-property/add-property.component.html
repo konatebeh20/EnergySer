@@ -10,178 +10,125 @@
 </section>
 <!-- /Hero Section -->
 
+
 <div class="container mt-5">
-  <h1 class="mb-4">Personals Informations</h1>
-  <form id="PersonalsInfosForm">
+  <h1 class="mb-4">Informations Personnelles et Propriétés</h1>
+  <form [formGroup]="properties_form" (ngSubmit)="sendProperties()">
+
     <!-- Client Details -->
+    <h3 class="mb-4">Détails du Client</h3>
     <div class="mb-4">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+      <input type="email" class="form-control" formControlName="email" placeholder="Entrez l'email" required>
     </div>
     <div class="mb-4">
       <label for="typeClient" class="form-label">Type de Client</label>
-      <select class="form-select" id="typeClient" required>
+      <select class="form-select" formControlName="type_client" required>
         <option value="Particulier">Particulier</option>
         <option value="Entreprise">Entreprise</option>
       </select>
     </div>
     <div class="mb-4">
       <label for="adresse" class="form-label">Adresse</label>
-      <input type="text" class="form-control" id="adresse" placeholder="Enter address" required>
+      <input type="text" class="form-control" formControlName="adresse" id="adresse" placeholder="Entrez l'adresse"
+        required>
     </div>
-  </form>
-</div>
 
-<div class="container mt-5">
-  <h1 class="mb-4">Properties</h1>
-  <form id="addPropertyForm">
     <!-- Property Details -->
+    <h3 class="mb-4">Détails de la Propriété</h3>
     <div class="mb-4">
-      <label for="propertyType" class="form-label">Property Type</label>
-      <select class="form-select" id="propertyType" required>
-        <option value="House">House</option>
-        <option value="Agency">Agency</option>
-        <option value="Apartment">Apartment</option>
-        <option value="Company">Company</option>
-        <option value="Office">Office</option>
-        <option value="Store">Store</option>
-        <option value="Other">Other</option>
+      <label for="propertyType" class="form-label">Type de Propriété</label>
+      <select class="form-select" formControlName="property_type" id="propertyType" required>
+        <option value="House">Maison</option>
+        <option value="Agency">Agence</option>
+        <option value="Apartment">Appartement</option>
+        <option value="Company">Entreprise</option>
+        <option value="Office">Bureau</option>
+        <option value="Store">Magasin</option>
+        <option value="Other">Autre</option>
       </select>
     </div>
     <div class="mb-4">
-      <label for="propertyName" class="form-label">Property Name</label>
-      <input type="text" class="form-control" id="propertyName" placeholder="Enter property name" required>
+      <label for="propertyName" class="form-label">Nom de la Propriété</label>
+      <input type="text" class="form-control" formControlName="property_name" id="propertyName"
+        placeholder="Entrez le nom de la propriété" required>
     </div>
 
     <!-- Device Details -->
-    <h3 class="mb-3">Device Details</h3>
-    <div id="deviceContainer"></div>
-    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#deviceModal">Add Another Device</button>
+    <h3 class="mb-4">Détails des Appareils</h3>
+    <div id="deviceContainer">
+      <!-- Les appareils ajoutés seront affichés ici -->
+    </div>
+    <!-- <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#deviceModal">Ajouter un
+      Appareil</button> -->
+
+    <!-- Submit Button -->
+    <div class="d-flex justify-content-center align-items-center" style="height: 15vh;">
+      <button type="submit" class="btn btn-success">Soumettre</button>
+    </div>
+
+
   </form>
-  <!-- Submit Button -->
-  <button type="button" class="btn btn-success" onclick="submitForm()">Submit</button>
 </div>
 
-<!-- Device Modal -->
-<!-- <div class="modal fade" id="deviceModal" tabindex="-1" aria-labelledby="deviceModalLabel" aria-hidden="true">
+<!-- Modal pour ajouter un appareil
+<div class="modal fade" id="deviceModal" tabindex="-1" aria-labelledby="deviceModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deviceModalLabel">Add Device</h5>
+        <h5 class="modal-title" id="deviceModalLabel">Ajouter un Appareil</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="deviceForm">
           <div class="mb-3">
-            <label class="form-label">Device Name</label>
+            <label class="form-label">Nom de l'Appareil</label>
             <input type="text" class="form-control" id="deviceName" required>
           </div>
           <div class="mb-3">
-            <label class="form-label">Power (Watts)</label>
+            <label class="form-label">Puissance (Watts)</label>
             <input type="number" class="form-control" id="devicePower" required>
           </div>
           <div class="mb-3">
-            <label class="form-label">Usage Time (hours/day)</label>
+            <label class="form-label">Temps d'Utilisation (heures/jour)</label>
             <input type="number" class="form-control" id="deviceUsageTime" required>
           </div>
           <div class="mb-3">
-            <label class="form-label">Usage Period</label>
-            <input type="text" class="form-control" id="deviceUsagePeriod" placeholder="e.g., 8:00-10:00" required>
+            <label class="form-label">Période d'Utilisation</label>
+            <input type="text" class="form-control" id="deviceUsagePeriod" placeholder="ex : 8:00-10:00" required>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="addDevice()">Add Device</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" onclick="addDevice()">Ajouter l'Appareil</button>
       </div>
     </div>
   </div>
 </div> -->
 
-<!-- Device Modal -->
-<div class="modal fade" id="deviceModal" tabindex="-1" aria-labelledby="deviceModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deviceModalLabel">Add Device</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="deviceForm">
-          <div class="mb-3">
-            <label class="form-label">Device Name</label>
-            <input type="text" class="form-control" id="deviceName" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Power (Watts)</label>
-            <input type="number" class="form-control" id="devicePower" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Usage Time (hours/day)</label>
-            <input type="number" class="form-control" id="deviceUsageTime" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Usage Period</label>
-            <input type="text" class="form-control" id="deviceUsagePeriod" placeholder="e.g., 8:00-10:00" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="addDevice()">Add Device</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- <script>
+  // Fonction pour ajouter un appareil
+  function addDevice() {
+    const deviceName = document.getElementById('deviceName').value;
+    const devicePower = document.getElementById('devicePower').value;
+    const deviceUsageTime = document.getElementById('deviceUsageTime').value;
+    const deviceUsagePeriod = document.getElementById('deviceUsagePeriod').value;
 
- <script>
-//   function addDevice() {
-//     const deviceName = document.getElementById('deviceName').value;
-//     const devicePower = document.getElementById('devicePower').value;
-//     const deviceUsageTime = document.getElementById('deviceUsageTime').value;
-//     const deviceUsagePeriod = document.getElementById('deviceUsagePeriod').value;
+    const deviceContainer = document.getElementById('deviceContainer');
+    const deviceDiv = document.createElement('div');
+    deviceDiv.classList.add('mb-3');
+    
+    deviceDiv.innerHTML = `
+      <h5>${deviceName}</h5>
+      <p>Puissance: ${devicePower} Watts</p>
+      <p>Temps d'Utilisation: ${deviceUsageTime} heures/jour</p>
+      <p>Période d'Utilisation: ${deviceUsagePeriod}</p>
+    `;
 
-//     if (deviceName && devicePower && deviceUsageTime && deviceUsagePeriod) {
-//       const deviceContainer = document.getElementById('deviceContainer');
-//       const deviceEntry = `
-//         <div class="device-entry border p-3 mb-3">
-//           <p><strong>Name:</strong> ${deviceName}</p>
-//           <p><strong>Power:</strong> ${devicePower} W</p>
-//           <p><strong>Usage Time:</strong> ${deviceUsageTime} hours/day</p>
-//           <p><strong>Usage Period:</strong> ${deviceUsagePeriod}</p>
-//         </div>
-//       `;
-//       deviceContainer.innerHTML += deviceEntry;
-//       document.getElementById('deviceForm').reset();
-//       const deviceModal = bootstrap.Modal.getInstance(document.getElementById('deviceModal'));
-//       deviceModal.hide();
-//     }
-//   }
+    deviceContainer.appendChild(deviceDiv);
 
-//   function addDevice() {
-//   const deviceName = document.getElementById('deviceName').value;
-//   const devicePower = document.getElementById('devicePower').value;
-//   const deviceUsageTime = document.getElementById('deviceUsageTime').value;
-//   const deviceUsagePeriod = document.getElementById('deviceUsagePeriod').value;
-
-//   if (deviceName && devicePower && deviceUsageTime && deviceUsagePeriod) {
-//     const deviceContainer = document.getElementById('deviceContainer');
-//     const deviceEntry = `
-//       <div class="device-entry border p-3 mb-3">
-//         <p><strong>Name:</strong> ${deviceName}</p>
-//         <p><strong>Power:</strong> ${devicePower} W</p>
-//         <p><strong>Usage Time:</strong> ${deviceUsageTime} hours/day</p>
-//         <p><strong>Usage Period:</strong> ${deviceUsagePeriod}</p>
-//       </div>
-//     `;
-//     deviceContainer.innerHTML += deviceEntry;
-//     document.getElementById('deviceForm').reset();
-//     const deviceModal = bootstrap.Modal.getInstance(document.getElementById('deviceModal'));
-//     deviceModal.hide();
-//   } else {
-//     alert("Please fill out all fields before adding the device.");
-//   }
-// }
-
- </script>
-
+    // Fermer la modal
+    $('#deviceModal').modal('hide');
+  }
+</script> -->

@@ -1,43 +1,91 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import {  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api/api.service';
+
+
+declare var bootstrap: any;
+
 
 @Component({
   selector: 'app-add-property',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-property.component.html',
   styleUrls: ['./add-property.component.scss']
 })
 export class AddPropertyComponent implements OnInit {
  
-  personalInfoForm: FormGroup;
-  propertyForm: FormGroup;
-  
-  constructor(
-    private fb: FormBuilder,
-    private rf: ReactiveFormsModule,
-    private http: HttpClient,
-    private apiService: ApiService,
-    // private modalService: NgbModal
-  ) {
-    this.personalInfoForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      typeClient: ['', Validators.required],
-      adresse: ['', Validators.required]
-    });
+  isloading: boolean = false;
 
-    this.propertyForm = this.fb.group({
-      propertyType: ['', Validators.required],
-      propertyName: ['', Validators.required],
-      devices: this.fb.array([])  // Example of adding a FormArray
-    });
+  properties_form: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    type_client: new FormControl('Particulier', Validators.required),
+    adresse: new FormControl('', Validators.required),
+    property_type: new FormControl('House', Validators.required),
+    property_name: new FormControl('', Validators.required)
+  })
+
+  ApiService: any;
+  
+
+  constructor(
+    
+    private api: ApiService,
+  ) {
+    this.isloading = false;
+   }
+
+
+  ngOnInit(): void {}
+
+  sendProperties() {
+    console.log("Hi", this.properties_form.value)
+
+    this.api.CreateProperties(this.properties_form.value).subscribe({
+          next:(res:any)=> {
+            console.log("Message sent successfully :", res);
+            // this.showSuccessToast("Your message has been successfully sent!");
+            this.properties_form.reset();
+          },
+          error: (err: any) => {
+            console.log("Error while sending :", err);
+            // this.showErrorToast("Message failed to send. Please try again.");
+          },
+          complete: () => {
+            this.isloading = false;
+            // console.log("contactService match");
+          },
+    })
+
+  };
+
+  showSuccessToast(message: string) {
+    const toastBody = document.getElementById("successToastBody");
+    if (toastBody) {
+      toastBody.textContent = message;
+    } else {
+      console.warn("Success toast body element not found.");
+    }
+
+    const toastElement = document.getElementById("successToast");
+    const toast = new bootstrap.Toast(toastElement, { delay: 2000 });
+    toast.show();
   }
 
-  ngOnInit(): void {
-    
+  showErrorToast(message: string) {
+    const toastBody = document.getElementById("errorToastBody");
+    if (toastBody) {
+      toastBody.textContent = message;
+    } else {
+      console.warn("Error toast body element not found.");
+    }
+
+    const toastElement = document.getElementById("errorToast");
+    const toast = new bootstrap.Toast(toastElement, { delay: 2000 });
+    toast.show();
   }
   
 }
