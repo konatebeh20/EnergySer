@@ -29,12 +29,19 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/aos/dist/aos.js",
+              "node_modules/waypoints/lib/noframework.waypoints.js",
+              "node_modules/swiper/swiper-bundle.min.js",
+              "node_modules/isotope-layout/dist/isotope.pkgd.min.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,20 @@
+{
+    "/api/*": {
+        "target": "https://energyser.com/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "router": {
+            "localhost:4200" : "https://energyser.com/"
+        }
+    },  
+    "/oauth/*": {
+        "target": "https://energyser.com/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "router": {
+            "localhost:4200" : "https://energyser.com/"
+        }
+    }         
+}
