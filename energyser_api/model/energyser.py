@@ -91,7 +91,7 @@ class Properties(db.Model):
     property_type = db.Column(db.String(50), nullable=False)
     property_name = db.Column(db.String(100), nullable=False)
 
-    global_active_power = db.Column(db.Float, nullable=True)
+    global_active_power = db.Column(db.Float, nullable=False)
     global_reactive_power = db.Column(db.Float, nullable=True)
     voltage = db.Column(db.Float, nullable=True)
     global_intensity = db.Column(db.Float, nullable=True)

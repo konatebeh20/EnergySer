@@ -17,7 +17,7 @@ from resources.recommander import RecommendationApi
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:4200"])
 
 # Configuration du JWT et de la base de données
 app.config['JWT_SECRET_KEY'] = 'super-secret'
@@ -79,16 +79,15 @@ api = Api(app)
 @app.route('/a')    
 def home():
     print('Trouvez Tous Officiel')
-    logger.info('FlotysHub')
+    # logger.info('FlotysHub')
     return render_template('index.html')
 
 # API routes
 # api.add_resource(UserApi, '/api/user/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-api.add_resource(PropertiesApi, '/api/recommend/<string:route>', endpoint='recommendations', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-# api.add_resource(RecommendationApi, '/api/drivers/<string:route>', endpoint='all_drivers', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-# api.add_resource(DriversApi, '/api/drivers/<string:route>', endpoint='all_drivers', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-
+api.add_resource(PropertiesApi, '/api/properties/<string:route>', endpoint='all_properties', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(RecommendationApi, '/api/recommend/<string:route>', endpoint='recommendations', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+# api.add_resource(DriversApi, '/api/drivers/<string:route>', endpoint='all_drivers', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)

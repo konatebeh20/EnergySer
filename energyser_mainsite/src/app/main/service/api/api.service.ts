@@ -24,7 +24,11 @@ export class ApiService {
   // }
   
   CreateProperties(body:any) {
-    return this.http.post(this.apiUrl + "api/properties/add-property", body)
+    return this.http.post(this.apiUrl+"api/properties/add-property", body)
   }
 
+  getRecommendations(propertyId: string) {
+    return this.http.get(`http://127.0.0.1:5000/api/recommend/${propertyId}`);
+  }
+  
 }
