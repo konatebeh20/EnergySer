@@ -1,1 +1,1 @@
-LIEN_BASE_DE_DONNEES = 'mysql+pymysql://root:souris_123@localhost/energyser'
+LIEN_BASE_DE_DONNEES = 'mysql+pymysql://root:@localhost/energyser'

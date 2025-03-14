@@ -17,7 +17,7 @@ declare var bootstrap: any;
   styleUrls: ['./add-property.component.scss']
 })
 export class AddPropertyComponent implements OnInit {
- 
+
   isloading: boolean = false;
 
   properties_form: FormGroup = new FormGroup({
@@ -25,14 +25,22 @@ export class AddPropertyComponent implements OnInit {
     type_client: new FormControl('Particulier', Validators.required),
     adresse: new FormControl('', Validators.required),
     property_type: new FormControl('House', Validators.required),
-    property_name: new FormControl('', Validators.required)
+    property_name: new FormControl('', Validators.required),
+
+    global_active_power: new FormControl('', Validators.required),
+    global_reactive_power: new FormControl('', Validators.required),
+    voltage: new FormControl('', Validators.required),
+    global_intensity: new FormControl('', Validators.required),
+    sub_metering_1: new FormControl('', Validators.required),
+    sub_metering_2: new FormControl('', Validators.required),
+    sub_metering_3: new FormControl('', Validators.required),
   })
 
   ApiService: any;
-  
+
 
   constructor(
-    
+
     private api: ApiService,
   ) {
     this.isloading = false;
@@ -42,7 +50,7 @@ export class AddPropertyComponent implements OnInit {
   ngOnInit(): void {}
 
   sendProperties() {
-    console.log("Hi", this.properties_form.value)
+    console.log("Hi This is Properties data:", this.properties_form.value)
 
     this.api.CreateProperties(this.properties_form.value).subscribe({
           next:(res:any)=> {
@@ -87,5 +95,5 @@ export class AddPropertyComponent implements OnInit {
     const toast = new bootstrap.Toast(toastElement, { delay: 2000 });
     toast.show();
   }
-  
+
 }

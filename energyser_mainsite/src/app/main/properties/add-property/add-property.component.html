@@ -54,6 +54,37 @@
         placeholder="Entrez le nom de la propriété" required>
     </div>
 
+
+    <h3 class="mb-4">Détails de l'Énergie</h3>
+    <div class="mb-4">
+      <label for="globalActivePower" class="form-label">Puissance Active Globale</label>
+      <input type="number" class="form-control" formControlName="global_active_power" placeholder="Entrez la puissance active" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="globalReactivePower" class="form-label">Puissance Réactive Globale</label>
+      <input type="number" class="form-control" formControlName="global_reactive_power" placeholder="Entrez la puissance réactive" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="voltage" class="form-label">Tension</label>
+      <input type="number" class="form-control" formControlName="voltage" placeholder="Entrez la tension" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="globalIntensity" class="form-label">Intensité Globale</label>
+      <input type="number" class="form-control" formControlName="global_intensity" placeholder="Entrez l'intensité globale" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="subMetering1" class="form-label">Sous-Mesure 1</label>
+      <input type="number" class="form-control" formControlName="sub_metering_1" placeholder="Entrez la sous-mesure 1" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="subMetering2" class="form-label">Sous-Mesure 2</label>
+      <input type="number" class="form-control" formControlName="sub_metering_2" placeholder="Entrez la sous-mesure 2" step="any">
+    </div>
+    <div class="mb-4">
+      <label for="subMetering3" class="form-label">Sous-Mesure 3</label>
+      <input type="number" class="form-control" formControlName="sub_metering_3" placeholder="Entrez la sous-mesure 3" step="any">
+    </div>
+
     <!-- Device Details -->
     <h3 class="mb-4">Détails des Appareils</h3>
     <div id="deviceContainer">
@@ -118,7 +149,7 @@
     const deviceContainer = document.getElementById('deviceContainer');
     const deviceDiv = document.createElement('div');
     deviceDiv.classList.add('mb-3');
-    
+
     deviceDiv.innerHTML = `
       <h5>${deviceName}</h5>
       <p>Puissance: ${devicePower} Watts</p>

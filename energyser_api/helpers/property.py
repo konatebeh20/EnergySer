@@ -20,6 +20,14 @@ def CreateProperties():
         propertyName = request.json.get('property_name')
         propertyType = request.json.get('property_type')
         typeClient = request.json.get('type_client')
+
+        globalActivePower = request.json.get('global_active_power')
+        globalReactivePower = request.json.get('global_reactive_power')
+        voltage = request.json.get('voltage')
+        globalIntensity = request.json.get('global_intensity')
+        subMetering1 = request.json.get('sub_metering_1')
+        subMetering2 = request.json.get('sub_metering_2')
+        subMetering3 = request.json.get('sub_metering_3')
         # uid = str(uuid.uuid4())
        
         
@@ -31,7 +39,15 @@ def CreateProperties():
         new_property.email = email
         new_property.property_name = propertyName
         new_property.property_type = propertyType
-        new_property.type_client = typeClient 
+        new_property.type_client = typeClient
+
+        new_property.global_active_power = globalActivePower
+        new_property.global_reactive_power = globalReactivePower
+        new_property.voltage = voltage
+        new_property.global_intensity = globalIntensity
+        new_property.sub_metering_1 = subMetering1
+        new_property.sub_metering_2 = subMetering2
+        new_property.sub_metering_3 = subMetering3
         
         
         # new_admin.uid = ad_uid

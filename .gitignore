@@ -45,6 +45,9 @@ jspm_packages/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
+# Ignore le dossier de l'environnement virtuel
+venv/
+
 # TypeScript cache
 *.tsbuildinfo
 

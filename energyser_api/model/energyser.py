@@ -90,6 +90,15 @@ class Properties(db.Model):
     adresse = db.Column(db.String(200), nullable=False)
     property_type = db.Column(db.String(50), nullable=False)
     property_name = db.Column(db.String(100), nullable=False)
+
+    global_active_power = db.Column(db.Float, nullable=True)
+    global_reactive_power = db.Column(db.Float, nullable=True)
+    voltage = db.Column(db.Float, nullable=True)
+    global_intensity = db.Column(db.Float, nullable=True)
+    sub_metering_1 = db.Column(db.Float, nullable=True)
+    sub_metering_2 = db.Column(db.Float, nullable=True)
+    sub_metering_3 = db.Column(db.Float, nullable=True)
+
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
     def __repr__(self):
@@ -105,3 +114,14 @@ class Properties(db.Model):
     # de_property = db.Column(db.String(128), nullable=False)
     # creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     # update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+
+class recommander(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    property_id = db.Column(db.Integer, db.ForeignKey('properties.id'), nullable=False)
+    recommander = db.Column(db.String(255), nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+    property = db.relationship('Properties', back_populates='recommanders')
+
+Properties.recommanders = db.relationship('recommander', back_populates='property')

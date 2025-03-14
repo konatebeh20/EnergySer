@@ -13,7 +13,7 @@ from flask_cors import CORS
 from model.energyser import *
 from resources.energyser import *
 
-
+from resources.recommander import RecommendationApi
 
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ app.secret_key = os.urandom(24)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = LIEN_BASE_DE_DONNEES
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
-db.init_app(app)
+db.init_app(app) # Initialisation de db avec app
 
 migrate = Migrate(app, db)
 api = Api(app)
@@ -84,7 +84,8 @@ def home():
 
 # API routes
 # api.add_resource(UserApi, '/api/user/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-api.add_resource(PropertiesApi, '/api/properties/<string:route>', endpoint='all_properties', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(PropertiesApi, '/api/recommend/<string:route>', endpoint='recommendations', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+# api.add_resource(RecommendationApi, '/api/drivers/<string:route>', endpoint='all_drivers', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 # api.add_resource(DriversApi, '/api/drivers/<string:route>', endpoint='all_drivers', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 
