@@ -11,118 +11,128 @@
 <!-- /Hero Section -->
 
 
+
+
 <div class="container mt-5">
   <h1 class="mb-4">Informations Personnelles et Propriétés</h1>
   <form [formGroup]="properties_form" (ngSubmit)="sendProperties()">
 
-    <!-- Client Details -->
-    <h3 class="mb-4">Détails du Client</h3>
-    <div class="mb-4">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" formControlName="email" placeholder="Entrez l'email" required>
-    </div>
-    <div class="mb-4">
-      <label for="typeClient" class="form-label">Type de Client</label>
-      <select class="form-select" formControlName="type_client" required>
-        <option value="Particulier">Particulier</option>
-        <option value="Entreprise">Entreprise</option>
-      </select>
-    </div>
-    <div class="mb-4">
-      <label for="adresse" class="form-label">Adresse</label>
-      <input type="text" class="form-control" formControlName="adresse" id="adresse" placeholder="Entrez l'adresse"
-        required>
-    </div>
+
+
+
 
     <!-- Property Details -->
-    <h3 class="mb-4">Détails de la Propriété</h3>
-    <div class="mb-4">
-      <label for="propertyType" class="form-label">Type de Propriété</label>
-      <select class="form-select" formControlName="property_type" id="propertyType" required>
-        <option value="House">Maison</option>
-        <option value="Agency">Agence</option>
-        <option value="Apartment">Appartement</option>
-        <option value="Company">Entreprise</option>
-        <option value="Office">Bureau</option>
-        <option value="Store">Magasin</option>
-        <option value="Other">Autre</option>
-      </select>
-    </div>
-    <div class="mb-4">
-      <label for="propertyName" class="form-label">Nom de la Propriété</label>
-      <input type="text" class="form-control" formControlName="property_name" id="propertyName"
-        placeholder="Entrez le nom de la propriété" required>
-    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Client Details -->
 
+          <div class="mb-4">
+            <label for="adresse" class="form-label">Adresse</label>
+            <input type="text" class="form-control" formControlName="adresse" id="adresse"
+              placeholder="Entrez l'adresse" required>
+          </div>
 
-    <h3 class="mb-4">Détails de l'Énergie</h3>
-    <div class="mb-4">
-      <label for="globalActivePower" class="form-label">Puissance Active Globale</label>
-      <input type="number" class="form-control" formControlName="global_active_power" placeholder="Entrez la puissance active" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="globalReactivePower" class="form-label">Puissance Réactive Globale</label>
-      <input type="number" class="form-control" formControlName="global_reactive_power" placeholder="Entrez la puissance réactive" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="voltage" class="form-label">Tension</label>
-      <input type="number" class="form-control" formControlName="voltage" placeholder="Entrez la tension" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="globalIntensity" class="form-label">Intensité Globale</label>
-      <input type="number" class="form-control" formControlName="global_intensity" placeholder="Entrez l'intensité globale" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="subMetering1" class="form-label">Sous-Mesure 1</label>
-      <input type="number" class="form-control" formControlName="sub_metering_1" placeholder="Entrez la sous-mesure 1" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="subMetering2" class="form-label">Sous-Mesure 2</label>
-      <input type="number" class="form-control" formControlName="sub_metering_2" placeholder="Entrez la sous-mesure 2" step="any">
-    </div>
-    <div class="mb-4">
-      <label for="subMetering3" class="form-label">Sous-Mesure 3</label>
-      <input type="number" class="form-control" formControlName="sub_metering_3" placeholder="Entrez la sous-mesure 3" step="any">
-    </div>
+          <h3 class="mb-4">Détails de la Propriété</h3>
+          <div class="mb-4">
+            <label for="propertyType" class="form-label">Type de Propriété</label>
+            <select class="form-select" formControlName="property_type" id="propertyType" required>
+              <option value="House">Maison</option>
+              <option value="Agency">Agence</option>
+              <option value="Apartment">Appartement</option>
+              <option value="Company">Entreprise</option>
+              <option value="Office">Bureau</option>
+              <option value="Store">Magasin</option>
+              <option value="Other">Autre</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="propertyName" class="form-label">Nom de la Propriété</label>
+            <input type="text" class="form-control" formControlName="property_name" id="propertyName"
+              placeholder="Entrez le nom de la propriété" required>
+          </div>
 
-    <!-- Device Details -->
-    <h3 class="mb-4">Détails des Appareils</h3>
-    <div id="deviceContainer">
-      <!-- Les appareils ajoutés seront affichés ici -->
-      <h3 class="mb-4">Détails de l'Énergie</h3>
-      <div class="mb-4">
-        <label for="globalActivePower" class="form-label">Puissance Active Globale</label>
-        <input type="number" class="form-control" formControlName="global_active_power"
-          placeholder="Entrez la puissance active" step="any">
-      </div>
-      <div class="mb-4">
-        <label for="globalReactivePower" class="form-label">Puissance Réactive Globale</label>
-        <input type="number" class="form-control" formControlName="global_reactive_power"
-          placeholder="Entrez la puissance réactive" step="any">
-      </div>
-      <div class="mb-4">
-        <label for="voltage" class="form-label">Tension</label>
-        <input type="number" class="form-control" formControlName="voltage" placeholder="Entrez la tension" step="any">
-      </div>
-      <div class="mb-4">
-        <label for="globalIntensity" class="form-label">Intensité Globale</label>
-        <input type="number" class="form-control" formControlName="global_intensity"
-          placeholder="Entrez l'intensité globale" step="any">
-      </div>
-      <div class="mb-4">
-        <label for="subMetering1" class="form-label">Sous-Mesure 1</label>
-        <input type="number" class="form-control" formControlName="sub_metering_1" placeholder="Entrez la sous-mesure 1"
-          step="any">
-      </div>
-      <div class="mb-4">
-        <label for="subMetering2" class="form-label">Sous-Mesure 2</label>
-        <input type="number" class="form-control" formControlName="sub_metering_2" placeholder="Entrez la sous-mesure 2"
-          step="any">
-      </div>
-      <div class="mb-4">
-        <label for="subMetering3" class="form-label">Sous-Mesure 3</label>
-        <input type="number" class="form-control" formControlName="sub_metering_3" placeholder="Entrez la sous-mesure 3"
-          step="any">
+          <h3 class="mb-4">Détails de l'Énergie</h3>
+          <div class="mb-4">
+            <label for="globalActivePower" class="form-label">Puissance Active Globale</label>
+            <input type="number" class="form-control" formControlName="global_active_power"
+              placeholder="Entrez la puissance active" step="any">
+          </div>
+          <div class="mb-4">
+            <label for="globalReactivePower" class="form-label">Puissance Réactive Globale</label>
+            <input type="number" class="form-control" formControlName="global_reactive_power"
+              placeholder="Entrez la puissance réactive" step="any">
+          </div>
+          <div class="mb-4">
+            <label for="voltage" class="form-label">Tension</label>
+            <input type="number" class="form-control" formControlName="voltage" placeholder="Entrez la tension"
+              step="any">
+          </div>
+          <div class="mb-4">
+            <label for="globalIntensity" class="form-label">Intensité Globale</label>
+            <input type="number" class="form-control" formControlName="global_intensity"
+              placeholder="Entrez l'intensité globale" step="any">
+          </div>
+          <div class="mb-4">
+            <label for="subMetering1" class="form-label">Sous-Mesure 1</label>
+            <input type="number" class="form-control" formControlName="sub_metering_1"
+              placeholder="Entrez la sous-mesure 1" step="any">
+          </div>
+          <div class="mb-4">
+            <label for="subMetering2" class="form-label">Sous-Mesure 2</label>
+            <input type="number" class="form-control" formControlName="sub_metering_2"
+              placeholder="Entrez la sous-mesure 2" step="any">
+          </div>
+          <div class="mb-4">
+            <label for="subMetering3" class="form-label">Sous-Mesure 3</label>
+            <input type="number" class="form-control" formControlName="sub_metering_3"
+              placeholder="Entrez la sous-mesure 3" step="any">
+          </div>
+
+          <h3 class="mb-4">Détails des Appareils</h3>
+          <div id="deviceContainer">
+            <h3 class="mb-4">Détails de l'Énergie</h3>
+            <div class="mb-4">
+              <label for="globalActivePower" class="form-label">Puissance Active Globale</label>
+              <input type="number" class="form-control" formControlName="global_active_power"
+                placeholder="Entrez la puissance active" step="any">
+            </div>
+            <div class="mb-4">
+              <label for="globalReactivePower" class="form-label">Puissance Réactive Globale</label>
+              <input type="number" class="form-control" formControlName="global_reactive_power"
+                placeholder="Entrez la puissance réactive" step="any">
+            </div>
+            <div class="mb-4">
+              <label for="voltage" class="form-label">Tension</label>
+              <input type="number" class="form-control" formControlName="voltage" placeholder="Entrez la tension"
+                step="any">
+            </div>
+            <div class="mb-4">
+              <label for="globalIntensity" class="form-label">Intensité Globale</label>
+              <input type="number" class="form-control" formControlName="global_intensity"
+                placeholder="Entrez l'intensité globale" step="any">
+            </div>
+            <div class="mb-4">
+              <label for="subMetering1" class="form-label">Sous-Mesure 1</label>
+              <input type="number" class="form-control" formControlName="sub_metering_1"
+                placeholder="Entrez la sous-mesure 1" step="any">
+            </div>
+            <div class="mb-4">
+              <label for="subMetering2" class="form-label">Sous-Mesure 2</label>
+              <input type="number" class="form-control" formControlName="sub_metering_2"
+                placeholder="Entrez la sous-mesure 2" step="any">
+            </div>
+            <div class="mb-4">
+              <label for="subMetering3" class="form-label">Sous-Mesure 3</label>
+              <input type="number" class="form-control" formControlName="sub_metering_3"
+                placeholder="Entrez la sous-mesure 3" step="any">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <img src="chemin/vers/votre/image.jpg" alt="Image de la propriété" class="img-fluid">
+        </div>
       </div>
     </div>
     <!-- <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#deviceModal">Ajouter un
