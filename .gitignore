@@ -55,6 +55,12 @@ venv/
 # TypeScript cache
 *.tsbuildinfo
 
+venv/
+
+*.pyc
+
+.pyc
+
 # Optional npm cache directory
 .npm
 
