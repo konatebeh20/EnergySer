@@ -19,6 +19,7 @@ pip install -r requirements.txt
 
 
 
+
 (5) générer automatiquement ce fichier en exécutant la commande suivante dans ton environnement virtuel
 pip freeze > requirements.txt
 
