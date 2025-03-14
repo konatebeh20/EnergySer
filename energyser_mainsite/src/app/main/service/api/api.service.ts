@@ -11,7 +11,7 @@ export class ApiService {
 
   // private apiUrl = 'http://localhost:5000/api/add-property';
 
-  apiUrl = environment.apiUrl;
+ private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
   
@@ -28,7 +28,7 @@ export class ApiService {
   }
 
   getRecommendations(propertyId: string) {
-    return this.http.get(`http://127.0.0.1:5000/api/recommend/${propertyId}`);
+    return this.http.get(`${this.apiUrl}api/recommend/${propertyId}`);
   }
   
 }
