@@ -3,6 +3,7 @@ import pymysql
 from config.db import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import expression
+from config.db import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -91,6 +92,8 @@ class Properties(db.Model):
     property_type = db.Column(db.String(50), nullable=False)
     property_name = db.Column(db.String(100), nullable=False)
 
+    # recommanders = db.relationship('recommander', back_populates='property')
+
     global_active_power = db.Column(db.Float, nullable=False)
     global_reactive_power = db.Column(db.Float, nullable=True)
     voltage = db.Column(db.Float, nullable=True)
@@ -125,3 +128,16 @@ class recommander(db.Model):
     property = db.relationship('Properties', back_populates='recommanders')
 
 Properties.recommanders = db.relationship('recommander', back_populates='property')
+
+class PropertyRecommendation(db.Model):
+    __tablename__ = 'property_recommendations'
+
+    id = db.Column(db.Integer, primary_key=True)
+    property_id = db.Column(db.Integer, nullable=False)
+    recommended_property_id = db.Column(db.Integer, nullable=False)
+    similarity_score = db.Column(db.Float, nullable=False)
+
+    def __init__(self, property_id, recommended_property_id, similarity_score):
+        self.property_id = property_id
+        self.recommended_property_id = recommended_property_id
+        self.similarity_score = similarity_score

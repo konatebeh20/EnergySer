@@ -50,6 +50,7 @@ export class AddPropertyComponent implements OnInit {
   ngOnInit(): void {}
 
   sendProperties() {
+    this.isloading = true;
     console.log("Hi This is Properties data:", this.properties_form.value)
 
     this.api.CreateProperties(this.properties_form.value).subscribe({
@@ -57,10 +58,14 @@ export class AddPropertyComponent implements OnInit {
             console.log("Message sent successfully :", res);
             // this.showSuccessToast("Your message has been successfully sent!");
             this.properties_form.reset();
+
+            this.isloading = false;
           },
           error: (err: any) => {
             console.log("Error while sending :", err);
             // this.showErrorToast("Message failed to send. Please try again.");
+
+            this.isloading = false;
           },
           complete: () => {
             this.isloading = false;

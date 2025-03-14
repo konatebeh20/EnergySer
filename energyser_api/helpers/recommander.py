@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_similarity
 from datetime import datetime
+from model.energyser import Properties
+from config.db import db
 
 # Fonction pour charger les données et les prétraiter
 def load_and_preprocess_data():
@@ -26,6 +28,23 @@ def load_and_preprocess_data():
 
     return data
 
+# # Fonction pour récupérer les propriétés de la base de données
+# def get_properties_from_db():
+#     properties = Properties.query.all()
+#     property_data = []
+
+#     # Récupérer les propriétés de la base de données et ajouter leurs données dans la liste
+#     for prop in properties:
+#         property_data.append([
+#             prop.global_active_power,
+#             prop.global_reactive_power,
+#             prop.voltage,
+#             prop.global_intensity
+#         ])
+    
+#     return pd.DataFrame(property_data)
+
+
 # Fonction pour calculer la similarité entre les propriétés basées sur la consommation d'énergie
 def calculate_similarity(data):
     # Calcul de la similarité cosinus entre les propriétés
@@ -40,3 +59,49 @@ def recommend_similar_properties(property_id, similarity_matrix):
 
     # Retourner les 5 propriétés les plus similaires
     return similar_properties[1:6]  # Exclut la propriété elle-même
+
+
+
+# Fonction principale pour effectuer la recommandation et enregistrer les données
+def make_recommendation(property_id):
+    dataset_data = load_and_preprocess_data()
+    db_data = get_properties_from_db()  # Récupérer les propriétés de la DB
+
+    # Combine les données du dataset et de la DB
+    combined_data = pd.concat([dataset_data[['Global_active_power', 'Global_reactive_power', 'Voltage', 'Global_intensity']], db_data], ignore_index=True)
+
+    # Calculer la similarité
+    similarity_matrix = calculate_similarity(combined_data)
+
+    # Récupérer les recommandations
+    recommendations = recommend_similar_properties(property_id, similarity_matrix)
+
+    # Enregistrer les recommandations dans la base de données et dans un fichier CSV
+    save_recommendations_to_db(property_id, recommendations)
+    save_recommendations_to_csv(recommendations)
+
+    return recommendations
+
+
+# Fonction pour sauvegarder les recommandations dans la base de données
+def save_recommendations_to_db(property_id, recommendations):
+    for recommended_property in recommendations:
+        recommended_property_id = recommended_property[0]
+        similarity_score = recommended_property[1]
+
+        # Crée un enregistrement pour chaque recommandation
+        recommendation = PropertyRecommendation(property_id=property_id, recommended_property_id=recommended_property_id, similarity_score=similarity_score)
+        db.session.add(recommendation)
+    db.session.commit()
+
+
+# Fonction pour sauvegarder les recommandations dans un fichier CSV
+def save_recommendations_to_csv(recommendations):
+    recommendations_data = []
+    for recommended_property in recommendations:
+        recommended_property_id = recommended_property[0]
+        similarity_score = recommended_property[1]
+        recommendations_data.append([recommended_property_id, similarity_score])
+
+    recommendations_df = pd.DataFrame(recommendations_data, columns=['PropertyID', 'SimilarityScore'])
+    recommendations_df.to_csv('EnergySer/energyser_api/data/electricity_recommendations.csv', mode='a', header=False, index=False)
