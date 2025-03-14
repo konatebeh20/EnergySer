@@ -48,6 +48,10 @@ web_modules/
 # Ignore le dossier de l'environnement virtuel
 venv/
 
+*.pyc
+
+.pyc
+
 # TypeScript cache
 *.tsbuildinfo
 
