@@ -31,7 +31,8 @@ def CreateProperties():
         new_property.email = email
         new_property.property_name = propertyName
         new_property.property_type = propertyType
-        new_property.type_client = typeClient
+        new_property.type_client = typeClient 
+        
         
         # new_admin.uid = ad_uid
         
