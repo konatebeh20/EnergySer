@@ -15,13 +15,13 @@ pip install pandas
 
 
 (4) installer toutes les bibliothèques en une seule commande
-pip install -r requirements.txt
+pip install -r requirement.txt
 
 
 
 
 (5) générer automatiquement ce fichier en exécutant la commande suivante dans ton environnement virtuel
-pip freeze > requirements.txt
+pip freeze > requirement.txt
 
 
 
