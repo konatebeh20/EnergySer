@@ -1,0 +1,50 @@
+Pour lancer le projet, executer le commande suivantes dans le terminal : 
+(1) Créer un environnement virtuelle
+python3 -m venv venv
+
+
+
+(2) monter sur votre environnement et activer le
+source venv/bin/activate
+
+
+
+(3) installer la bibliothèque pandas
+pip install pandas
+
+
+
+(4) installer toutes les bibliothèques en une seule commande
+pip install -r requirements.txt
+
+
+
+(5) générer automatiquement ce fichier en exécutant la commande suivante dans ton environnement virtuel
+pip freeze > requirements.txt
+
+
+
+(6) lancer l'application
+python3 app.py
+
+
+
+
+
+(7)Initialiser les migrations
+flask db init
+
+
+
+(8) Initialiser les migrations
+flask db migrate -m "Message de migration"
+
+
+
+(9) Appliquer les migrations 
+flask db upgrade
+
+
+
+(10) Vérifier l'historique des migrations
+flask db history

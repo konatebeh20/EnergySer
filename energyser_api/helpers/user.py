@@ -5,7 +5,7 @@ from config.db import db
 
 import bcrypt
 from flask_jwt_extended import create_access_token
-from model.powercalc import User
+from model.energyser import User
 
 
 def CreateUser():
@@ -20,7 +20,7 @@ def CreateUser():
         ad_password = (request.json.get('password'))
         ad_uid = str(uuid.uuid4())
 
-        hashed_password = bcrypt.hashpw(ad_password.encode('utf-8'), bcrypt.gensalt())
+       
         
         new_admin = User()
         new_admin.ad_fullname = ad_fullname 
